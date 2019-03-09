@@ -104,7 +104,8 @@ impl Behavior<Buf> for Cli {
   }
 
   fn resolve(&mut self, specifier: &str, referrer: deno_mod) -> deno_mod {
-    unimplemented!()
+    let mut modules = self.state.modules.lock().unwrap();
+    modules.resolve_cb(&self.state.dir, specifier, referrer)
   }
 
   fn recv(
